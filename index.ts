@@ -1,22 +1,16 @@
-import { getDataFromTable } from "./api";
+import { processingApiRequests } from "./api";
 import { createState, runStatServe, writeStats } from "./fetchPik";
 
-runStatServe()
+//runStatServe()
 Bun.serve({
   port: 8080,
-  //hostname: "hatyhaty.com", 
-  fetch(req) {
+  fetch(req): Response {
     const url = new URL(req.url);
+    if(url.pathname.includes("/api/v1")) {
+      return processingApiRequests(url.pathname);
+      
+    }
     //const sp: URLSearchParams = url.searchParams;
-    if (url.pathname === "/kavk") {
-      return new Response(JSON.stringify(getDataFromTable("KAVK")));
-    }
-    if (url.pathname === "/amur") {
-      return new Response(JSON.stringify(getDataFromTable("AMUR")));
-    }
-    if (url.pathname === "/sign") {
-      return new Response(JSON.stringify(getDataFromTable("SIGN")));
-    }
     return new Response(Bun.file("www/index.html"));
   }
 })
