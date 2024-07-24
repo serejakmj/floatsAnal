@@ -1,0 +1,14 @@
+{
+  "name": "floatsanal",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "pm2": "^5.4.1"
+  }
+}
